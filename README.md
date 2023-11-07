@@ -97,25 +97,21 @@ Checking the null() function:
 ![Screenshot 2023-11-07 210206](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/6cfd9f72-e337-4e4e-9327-6d0fd00f2eda)
 
 Data Duplicate:
-
 ![Screenshot 2023-11-07 210213](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/1b279bb0-28a1-4ef7-a4f1-db31a509e77e)
 
 Print data:
 
-
-   ![Screenshot 2023-11-07 210220](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/c943d4a5-3d07-47ef-9e37-9ee37560ec96)
+![Screenshot 2023-11-07 210220](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/c943d4a5-3d07-47ef-9e37-9ee37560ec96)
 
 Data status:
 
 ![Screenshot 2023-11-07 210228](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/fdcbdd3e-a77b-4232-89ca-f8c1b3e10d78)
 
 Y prediction array:
-
-  ![Screenshot 2023-11-07 210237](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/ff9626ea-a525-4f03-bdaa-bbba6d0a58e9)
+![Screenshot 2023-11-07 210237](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/ff9626ea-a525-4f03-bdaa-bbba6d0a58e9)
 
 accuracy value:
-
- ![Screenshot 2023-11-07 210244](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/7e85cae4-3319-417f-a9e4-aa73f90fd0a2)
+![Screenshot 2023-11-07 210244](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/7e85cae4-3319-417f-a9e4-aa73f90fd0a2)
 
 confusion array:
 ![Screenshot 2023-11-07 210250](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/482a0381-f5b9-4d0d-8269-c538c10cc757)
