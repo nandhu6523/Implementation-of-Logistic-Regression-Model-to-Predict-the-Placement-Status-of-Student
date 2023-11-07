@@ -77,24 +77,6 @@ from sklearn.metrics import confusion_matrix
 confusion=confusion_matrix(y_test,y_pred)
 confusion
 
-from sklearn.linear_model import LogisticRegression
-lr = LogisticRegression(solver = "liblinear") 
-lr.fit(x_train,y_train)
-y_pred = lr.predict(x_test)
-y_pred
-
-from sklearn.metrics import accuracy_score
-accuracy = accuracy_score(y_test,y_pred)
-accuracy
-
-from sklearn.metrics import confusion_matrix
-confusion = (y_test,y_pred)
-confusion 
-
-from sklearn.metrics import classification_report
-classification_report1 = classification_report(y_test,y_pred)
-print(classification_report1)
-
 from sklearn.metrics import classification_report
 classification_report1 = classification_report(y_test,y_pred)
 print(classification_report1)
