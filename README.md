@@ -34,121 +34,95 @@ RegisterNumber:  212222220028
 
 
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+data=pd.read_csv("Placement_Data.csv")
+data.head()
 
-#reading the file
-dataset = pd.read_csv('Placement_Data_Full_Class.csv')
+data1=data.copy()
+data1=data1.drop(["sl_no","salary"],axis=1)#Browses the specified row or column
+data1.head()
 
-dataset
-dataset.head(20)
-dataset.tail(20)
+data1.isnull().sum()
 
-#droping tha serial no salary col
-dataset = dataset.drop('sl_no',axis=1)
-#dataset = dataset.drop('salary',axis=1)
-dataset = dataset.drop('gender',axis=1)
-dataset = dataset.drop('ssc_b',axis=1)
-dataset = dataset.drop('hsc_b',axis=1)
-dataset
-dataset.shape
-dataset.info()
+data1.duplicated().sum()
 
-#catgorising col for further labelling
-dataset["degree_t"] = dataset["degree_t"].astype('category')
-dataset["workex"] = dataset["workex"].astype('category')
-dataset["specialisation"] = dataset["specialisation"].astype('category')
-dataset["status"] = dataset["status"].astype('category')
-dataset["hsc_s"] = dataset["hsc_s"].astype('category')
-dataset.dtypes
-dataset.info()
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data1["gender"]=le.fit_transform(data1["gender"])
+data1["ssc_b"]=le.fit_transform(data1["ssc_b"])
+data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
+data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
+data1["degree_t"]=le.fit_transform(data1["degree_t"])
+data1["workex"]=le.fit_transform(data1["workex"])
+data1["specialisation"]=le.fit_transform(data1["specialisation"] )     
+data1["status"]=le.fit_transform(data1["status"])       
+data1 
 
-dataset["degree_t"] = dataset["degree_t"].cat.codes
-dataset["workex"] = dataset["workex"].cat.codes
-dataset["specialisation"] = dataset["specialisation"].cat.codes
-dataset["status"] = dataset["status"].cat.codes
-dataset["hsc_s"] = dataset["hsc_s"].cat.codes
-dataset
-dataset.info()
-dataset
+x=data1.iloc[:,:-1]
+x
 
-#selecting the features and labels
-x = dataset.iloc[:,:-1].values
-y = dataset.iloc[:,-1].values
+y=data1["status"]
 y
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test = train_test_split(x, y,test_size=0.2)
-dataset.head()
-
-x_train.shape
-x_test.shape
-y_train.shape
-y_test.shape
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
 
 from sklearn.linear_model import LogisticRegression
-clf= LogisticRegression()
-clf.fit(x_train,y_train)
-clf.score(x_test,y_test)
+lr=LogisticRegression(solver="liblinear")
+lr.fit(x_train,y_train)
+y_pred=lr.predict(x_test)
+y_pred
 
-clf.predict([[0, 87, 0, 95, 0, 2, 78, 2, 0]])
+from sklearn.metrics import accuracy_score
+accuracy=accuracy_score(y_test,y_pred)
+accuracy
+
+from sklearn.metrics import confusion_matrix
+confusion=confusion_matrix(y_test,y_pred)
+confusion
+
+from sklearn.metrics import classification_report
+classification_report1 = classification_report(y_test,y_pred)
+print(classification_report1)
+
+lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
 */
 ```
 
 ## Output:
-DATASET:
-![Screenshot 2023-09-26 205003](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/50ca3067-fa48-4ad8-9a81-bdc91f74c9b7)
 
-dataset.head():
-![Screenshot 2023-09-26 205017](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/c9940147-0947-4e63-b6f1-73f092899505)
+Placement Data:
+![Screenshot 2023-11-07 210148](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/0343d9df-33e2-4ec2-ae38-f2bf4d95ddaf)
 
-dataset.tail():
-![Screenshot 2023-09-26 205029](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/09f7655d-67c6-4b97-82c3-1c7d79c55a60)
+salary data:
+![Screenshot 2023-11-07 210158](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/0117f208-f8d0-452e-97f1-03b2600397b0)
 
-dataset after dropping:
+Checking the null() function:
+![Screenshot 2023-11-07 210206](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/6cfd9f72-e337-4e4e-9327-6d0fd00f2eda)
 
-![Screenshot 2023-09-26 205042](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/9b043f92-b1a6-4e5e-a27a-931cee0b82b7)
-![Screenshot 2023-09-26 205054](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/01dbebbe-0789-49e4-b7b7-991633391720)
+Data Duplicate:
+![Screenshot 2023-11-07 210213](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/1b279bb0-28a1-4ef7-a4f1-db31a509e77e)
 
-datase.shape:
-![Screenshot 2023-09-26 205110](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/33a03b72-8ebd-417a-97e2-391d3958e747)
+Print data:
+![Screenshot 2023-11-07 210220](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/c943d4a5-3d07-47ef-9e37-9ee37560ec96)
 
-dataset.info()
-![Screenshot 2023-09-26 205116](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/d2c0fa5d-9f97-4dd9-be65-d3ec7c55273a)
+Data status:
+![Screenshot 2023-11-07 210228](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/fdcbdd3e-a77b-4232-89ca-f8c1b3e10d78)
 
-dataset.dtypes:
-![Screenshot 2023-09-26 205121](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/764b8889-41b9-4041-a6e5-e112212b2514)
+Y prediction array:
+![Screenshot 2023-11-07 210237](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/ff9626ea-a525-4f03-bdaa-bbba6d0a58e9)
 
-dataset.info():
-![Screenshot 2023-09-26 205135](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/2da8decf-3e37-46f1-85f7-f2b6681a3763)
+accuracy value:
+![Screenshot 2023-11-07 210244](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/7e85cae4-3319-417f-a9e4-aa73f90fd0a2)
 
-dataset.codes:
-![Screenshot 2023-09-26 205145](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/f46940e1-11c6-4381-b561-d71a1f6a5cfe)
+confusion array:
+![Screenshot 2023-11-07 210250](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/482a0381-f5b9-4d0d-8269-c538c10cc757)
 
-selecting the features and labels:
-![Screenshot 2023-09-26 205151](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/5718ffab-7a4a-4ec6-90bb-ae008d5b4021)
+Classification report:
+![Screenshot 2023-11-07 210256](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/5f1f9016-21d6-4176-9956-8ef8bc27b1ce)
 
-dataset.head():
-![Screenshot 2023-09-26 205209](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/39f5f733-b0a7-479d-9513-ab7672db7aae)
+Prediction of LR:
 
-x_train.shape:
-![Screenshot 2023-09-26 205214](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/d6176757-3261-4c16-9dd6-9cc7c7944da1)
+![Screenshot 2023-11-07 210305](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/011493e2-c0c7-4787-ad42-4016707b96e8)
 
-x_test.shape:
-![Screenshot 2023-09-26 205218](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/3d6c6947-30d9-4b53-9769-87aba373577b)
-
-y_train.shape:
-![Screenshot 2023-09-26 205233](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/aa7e945b-ff5e-4f9f-9c49-b6c5d2479624)
-
-y_test.shape:
-![Screenshot 2023-09-26 205233](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/c02e568c-2181-4a89-9f78-7b35eb063a1f)
-
-clf.predict:
-![Screenshot 2023-09-26 205243](https://github.com/nandhu6523/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/123856724/3fe141d5-a582-4a33-80e4-2b4be29abab0)
-
-
-
-
-
-## Result:
+ ## Result:
 Thus the program to implement the the Logistic Regression Model to Predict the Placement Status of Student is written and verified using python programming.
